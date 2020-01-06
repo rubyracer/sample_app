@@ -8,8 +8,13 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
+    assert_select "a[href=?]", signup_path
   end
 
+  test "layout links Sign up" do
+    get signup_path
+    assert_select "title", full_title("Sign up")
+  end
   # test "the truth" do
   #   assert true
   # end
