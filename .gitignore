@@ -31,3 +31,6 @@
 /config/master.key
 
 .idea
+
+# это для запуска тестов при работе на убунте под виртуальной машиной из общей папки с виндой
+# bin/rails db:migrate RAILS_ENV=test

@@ -48,6 +48,7 @@ group :development, :test do
   gem 'sqlite3'
 
   gem 'minitest-reporters'
+  # gem 'pry-rails'
 end
 
 group :development do
