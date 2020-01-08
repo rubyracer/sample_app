@@ -41,6 +41,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :production do
   gem 'pg'
+  gem 'puma', '~> 3.11'
 end
 
 group :development, :test do
