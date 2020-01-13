@@ -18,4 +18,51 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
+
+=begin
+# Осуществляет вход тестового пользователя
+  def log_in_as(user, options = {})
+    password    = options[:password]    || 'password'
+    remember_me = options[:remember_me] || '1'
+    if integration_test?
+      post login_path, session: { email:       user.email,
+                                  password:    password,
+                                  remember_me: remember_me }
+    else
+      session[:user_id] = user.id
+    end
+  end
+
+  private
+
+    # Возвращает true внутри интеграционных тестов
+    def integration_test?
+      defined?(post_via_redirect)
+    end
+
+=end
+
+
+  # Осуществляет вход тестового пользователя
+  def log_in_as(user, options = {})
+    password    = options[:password]    || 'password'
+    remember_me = options[:remember_me] || '1'
+    if integration_test?
+      session_params = {
+        email: user.email,
+        password: password,
+        remember_me: remember_me
+      }
+      post login_path, params: { session: session_params }
+    else
+      session[:user_id] = user.id
+    end
+  end
+
+  private
+
+    # Возвращает true внутри интеграционных тестов
+    def integration_test?
+      defined?(post_via_redirect)
+    end
 end
