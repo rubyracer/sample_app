@@ -11,6 +11,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should redirect index when not logged in" do
+    # get :index
+    get "/users"
+    assert_redirected_to login_url
+  end
+
   test "should redirect edit when not logged in" do
     # get :edit, id: @user
     get edit_user_path(@user)
