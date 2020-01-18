@@ -40,6 +40,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  test "should not allow the admin attribute to be edited via the web" do
+    log_in_as(@other_user)
+    assert_not @other_user.admin?
+    user_params_variant = { password: "new_password",
+                            password_confirmation: "new_password",
+                            admin: 1 }
+    # patch :update, id: @other_user, user: { password: FILL_IN, password_confirmation: FILL_IN, admin: FILL_IN }
+    patch user_path(@other_user), params: {user: user_params_variant}
+
+    @other_user.reload
+    assert_not @other_user.admin?
+
+    @other_user.toggle!(:admin)
+    assert @other_user.admin?
+  end
+
   test "should redirect update when logged in as wrong user" do
     log_in_as(@other_user)
     user_params_variant = { name: @user.name, email: @user.email }
