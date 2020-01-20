@@ -15,7 +15,15 @@ class UserMailer < ApplicationMailer
 
   def account_activation(user)
     @user = user
+
+    # Листинг 10.11: Отправка ссылки на активацию аккаунта.
     mail to: user.email, subject: "Account activation"
+
+    # это для человеко-понятного отображения содержимого в логе рельсо-консоли (небезопасно)
+    # mail to: user.email, subject: "Account activation" do |format|
+      # format.text(content_transfer_encoding: "7bit")
+      # format.html(content_transfer_encoding: "7bit")
+    # end
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
