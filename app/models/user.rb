@@ -82,6 +82,11 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
+  # Возвращает true, если истек срок давности ссылки для сброса пароля .
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
   private
 
     # Переводит адрес электронной почты в нижний регистр.
