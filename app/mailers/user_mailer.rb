@@ -43,12 +43,12 @@ class UserMailer < ApplicationMailer
     @user = user
 
     # Листинг 10.43: Отправка ссылки на сброс пароля.
-    # mail to: user.email, subject: "Password reset"
+    mail to: user.email, subject: "Password reset"
 
     # это для человеко-понятного отображения содержимого в логе рельсо-консоли (небезопасно)
-    mail to: user.email, subject: "Password reset" do |format|
-      format.text(content_transfer_encoding: "7bit")
-      format.html(content_transfer_encoding: "7bit")
-    end
+    # mail to: user.email, subject: "Password reset" do |format|
+    #   format.text(content_transfer_encoding: "7bit")
+    #   format.html(content_transfer_encoding: "7bit")
+    # end
   end
 end
