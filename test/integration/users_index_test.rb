@@ -5,6 +5,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     @user = @admin = users(:michael)
     @non_admin = users(:archer)
     @first_page_of_five_users = User.paginate(page: 1, per_page: 5)
+    @non_activated = users(:passive)
+    # debugger
   end
 
   test "index including pagination" do
@@ -35,4 +37,21 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     get users_path
     assert_select 'a', text: 'delete', count: 0
   end
+
+  test "get non-activated users redirect to root_path" do
+    log_in_as(@non_admin)
+    get user_path(@non_activated)
+    assert_redirected_to root_path
+  end
+
+  test "index hidden non-activated users" do
+    log_in_as(@non_admin)
+    get users_path
+    users.each do |user|
+      if user.activated?
+        #todo
+      end
+    end
+  end
+
 end
