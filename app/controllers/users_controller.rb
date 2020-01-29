@@ -68,13 +68,13 @@ class UsersController < ApplicationController
     # Предфильтры
 
     # Подтверждает вход пользователя
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
+    # def logged_in_user
+    #   unless logged_in?
+    #     store_location
+    #     flash[:danger] = "Please log in."
+    #     redirect_to login_url
+    #   end
+    # end
 
     # Подтверждает правильного пользователя
     def correct_user
