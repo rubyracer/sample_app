@@ -30,6 +30,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Игнорирование загруженных тестовых изображений.
+/public/uploads
+
 .idea
 
 # это для запуска тестов при работе на убунте под виртуальной машиной из общей папки с виндой
